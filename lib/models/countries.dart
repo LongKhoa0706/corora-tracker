@@ -75,8 +75,8 @@ class CountryInfo {
   int iId;
   String iso2;
   String iso3;
-  int lat;
-  int long;
+  dynamic lat;
+  dynamic long;
   String flag;
 
   CountryInfo({this.iId, this.iso2, this.iso3, this.lat, this.long, this.flag});
@@ -95,8 +95,8 @@ class CountryInfo {
     data['_id'] = this.iId;
     data['iso2'] = this.iso2;
     data['iso3'] = this.iso3;
-    data['lat'] = this.lat;
-    data['long'] = this.long;
+    data['lat'] = this.lat.toDouble();
+    data['long'] = this.long.toDouble();
     data['flag'] = this.flag;
     return data;
   }

@@ -6,6 +6,7 @@
          additional functionality it is fine to subclass or reimplement
          FlutterApplication and put your custom class here. -->
     <application
+
         android:name="io.flutter.app.FlutterApplication"
         android:label="statisticalcorona"
         android:icon="@mipmap/ic_launcher">
@@ -26,5 +27,7 @@
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />
+        <meta-data android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyAOhV87FEn-XwWkRWcoVGdCaZDhloe2IDc"/>
     </application>
 </manifest>

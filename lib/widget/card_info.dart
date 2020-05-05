@@ -9,12 +9,10 @@ class CardInfo extends StatelessWidget {
 
   const CardInfo({Key key, this.number, this.title, this.numberColors, this.gradient}) : super(key: key);
 
-
-
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(bottom: 20,left: 10),
+      padding: EdgeInsets.only(bottom: 10,left: 10),
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 15,vertical: 10),
         decoration: BoxDecoration(

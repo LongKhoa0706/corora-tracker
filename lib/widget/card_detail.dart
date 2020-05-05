@@ -106,11 +106,12 @@ class CardDetail extends StatelessWidget {
                Counter(
                  title: "Active",
                  detail: active,
+
                  numberColors: Color(0xff8e61f3),
                ),
                 Counter(
                   title: "Deaths",
-                  numberColors: Color(0xffe84d86),
+                  numberColors: Colors.red,
                   detail: deaths,
                 ),
                 Counter(
