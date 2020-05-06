@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'package:statisticalcorona/provider/case_provider.dart';
-import 'package:statisticalcorona/views/homescreen.dart';
-import 'package:statisticalcorona/views/mapscreen.dart';
-import 'package:statisticalcorona/views/newsscreen.dart';
-import 'package:statisticalcorona/widget/card_detail.dart';
-import 'package:statisticalcorona/widget/card_info.dart';
+import 'package:statisticalcorona/views/home_screen.dart';
+import 'package:statisticalcorona/views/map_screen.dart';
+import 'package:statisticalcorona/views/news_screen.dart';
+import 'package:statisticalcorona/widget/home/card_detail.dart';
+
 
 
 class DashBoard extends StatefulWidget {

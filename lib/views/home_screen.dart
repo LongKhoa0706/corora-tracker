@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:statisticalcorona/provider/case_provider.dart';
-import 'package:statisticalcorona/widget/card_detail.dart';
-import 'package:statisticalcorona/widget/card_info.dart';
+import 'package:statisticalcorona/widget/home/card_detail.dart';
+import 'package:statisticalcorona/widget/home/card_info.dart';
 
 class HomeScreen extends StatefulWidget {
   @override

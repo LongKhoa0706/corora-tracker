@@ -29,6 +29,7 @@ dependencies:
   shared_preferences: ^0.5.7
   pull_to_refresh: ^1.5.8
   google_maps_flutter: ^0.5.27
+  webview_flutter: ^0.3.21
 
 
 dev_dependencies:

@@ -34,7 +34,6 @@ class CaseProvider with ChangeNotifier{
           arrCountries.add(Countries.fromJson(data)),
       });
     }
-    debugPrint("${res.data}");
     return arrCountries;
   }
   Future initcialCall () async{

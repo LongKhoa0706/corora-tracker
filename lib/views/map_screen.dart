@@ -13,11 +13,11 @@ class _MapScreenState extends State<MapScreen> {
 
   Completer<GoogleMapController> _controller = Completer();
 
-//  final CameraPosition _kGooglePlex = CameraPosition(
-//    target: LatLng(37.42796133580664, -122.085749655962),
-//    zoom: 14.4746,
-//  );
-//
+  final CameraPosition _kGooglePlex = CameraPosition(
+    target: LatLng(37.42796133580664, -122.085749655962),
+    zoom: 14.4746,
+  );
+
   final CameraPosition _kLake = CameraPosition(
       bearing: 192.8334901395799,
       target: LatLng(37.43296265331129, -122.08832357078792),
@@ -30,7 +30,6 @@ class _MapScreenState extends State<MapScreen> {
     super.initState();
     rootBundle.loadString('assets/map_style.txt').then((string){
       mapStyle = string;
-
     });
   }
 
@@ -38,10 +37,10 @@ class _MapScreenState extends State<MapScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: GoogleMap(
-
         initialCameraPosition: _kLake,
         onMapCreated: (GoogleMapController controller) {
           controller.setMapStyle(mapStyle);
+
           _controller.complete(controller);
         },
       ),
