@@ -1,7 +1,7 @@
 import 'dart:ui';
 
 import 'package:fl_chart/fl_chart.dart';
-import 'package:statisticalcorona/widget/home/counter.dart';
+import 'package:statisticalcorona/widget/home/counter_home.dart';
 import 'package:flutter/material.dart';
 
 import 'indicator.dart';
@@ -55,7 +55,6 @@ class CardDetail extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
         width: double.infinity,
-
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(13),

@@ -8,9 +8,11 @@ class CaseProvider with ChangeNotifier{
   bool _isLoading = true;
   var api = API();
   List<Countries> arrCountries = [];
-
+  List<Countries> filterCountries = [];
+  List listDataCountries = [];
 
   bool get isLoading => _isLoading;
+
     void setLoadingStatus(bool status) {
       _isLoading = status;
       notifyListeners();
@@ -29,7 +31,7 @@ class CaseProvider with ChangeNotifier{
     var dio = Dio();
     var res = await dio.get(api.urlDataCountries);
     if (res.statusCode == 200) {
-      List listDataCountries = res.data;
+       listDataCountries = res.data;
       listDataCountries.forEach((data)=>{
           arrCountries.add(Countries.fromJson(data)),
       });
@@ -43,5 +45,11 @@ class CaseProvider with ChangeNotifier{
     notifyListeners();
   }
 
+  void searchCountries(value){
+      filterCountries = listDataCountries.where((element) => element.country.toLowerCase().contains(value)).toList();
+      print(filterCountries.length);
+      print(listDataCountries.length);
+      notifyListeners();
+    }
 
 }

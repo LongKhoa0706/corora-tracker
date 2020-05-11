@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:statisticalcorona/provider/case_provider.dart';
+import 'package:statisticalcorona/provider/detail_cases_provider.dart';
 import 'package:statisticalcorona/provider/news_provider.dart';
 import 'package:statisticalcorona/provider/theme_provider.dart';
 import 'package:statisticalcorona/views/dashboard.dart';
@@ -12,6 +13,7 @@ void main() => runApp(
     providers: [
       ChangeNotifierProvider(create: (_)=>CaseProvider()),
       ChangeNotifierProvider(create: (_)=>NewsProvider()),
+      ChangeNotifierProvider(create: (_)=>DetailCasesProvider(),),
     ],
     child: MyApp(),
   ),

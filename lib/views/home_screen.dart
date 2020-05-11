@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:statisticalcorona/provider/case_provider.dart';
+import 'package:statisticalcorona/provider/detail_cases_provider.dart';
+import 'package:statisticalcorona/views/detail_cases.dart';
 import 'package:statisticalcorona/widget/home/card_detail.dart';
 import 'package:statisticalcorona/widget/home/card_info.dart';
 
@@ -10,16 +12,18 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+
     Provider.of<CaseProvider>(context, listen: false).initcialCall();
+
   }
 
   @override
   Widget build(BuildContext context) {
+    var data =     Provider.of<CaseProvider>(context, listen: false);
     return Scaffold(
       backgroundColor: Colors.white,
       body: RefreshIndicator(
@@ -27,7 +31,6 @@ class _HomeScreenState extends State<HomeScreen> {
           var casesProvider = Provider.of<CaseProvider>(context, listen: false);
           casesProvider.setLoadingStatus(true);
           await casesProvider.initcialCall();
-
         },
         child: SingleChildScrollView(
           child: Padding(
@@ -52,6 +55,10 @@ class _HomeScreenState extends State<HomeScreen> {
                             borderRadius: BorderRadius.circular(13),
                           ),
                           child: TextField(
+                            onChanged: (value){
+                              data.searchCountries(value);
+                              print(value);
+                            },
                             decoration: InputDecoration(
                               hintText: "Search Country",
                               hintStyle: TextStyle(
@@ -70,36 +77,6 @@ class _HomeScreenState extends State<HomeScreen> {
                       SizedBox(
                         width: 15,
                       ),
-//                    Container(
-//                      width: 50,
-//                      height: 50,
-//                      decoration: BoxDecoration(
-//                        color: Colors.grey[500],
-//                        boxShadow: [
-//                          BoxShadow(
-//                            color: Colors.white.withOpacity(.5),
-//                            offset: Offset(5,5),
-//
-//                          )
-//                        ],
-//                        borderRadius: BorderRadius.circular(10),
-//                      ),
-//                      child: GestureDetector(
-//                        onTap: (){
-//                          setState(() {
-//
-//                             isOn = !isOn;
-//                          });
-//                        },
-//                        child: isOn ?  Icon(
-//                          Icons.wb_sunny,
-//                          color: Colors.black,
-//                        ): Icon(
-//                          Icons.wb_sunny,
-//                          color: Colors.white,
-//                        ),
-//                      )
-//                    ),
                     ],
                   ),
                   SizedBox(
@@ -118,48 +95,49 @@ class _HomeScreenState extends State<HomeScreen> {
                       return value.isLoading
                           ? CircularProgressIndicator()
                           : GridView.count(
-                        shrinkWrap: true,
-                        physics: ClampingScrollPhysics(),
-                        crossAxisCount: 2,
-                        children: <Widget>[
-                          CardInfo(
-                            number: value.countries.cases,
-                            numberColors: Color(0xff8e61f3),
-                            title: "infections",
-                            gradient: [
-                              Color(0xfff9f6fe),
-                              Color(0xfffbfafe),
-                            ],
-                          ),
-                          CardInfo(
-                            number: value.countries.deaths,
-                            numberColors: Colors.red,
-                            title: "deaths",
-                            gradient: [
-                              Color(0xfffef1f6),
-                              Color(0xfffef6fa),
-                            ],
-                          ),
-                          CardInfo(
-                            number: value.countries.recovered,
-                            numberColors: Color(0xff2ac386),
-                            title: "recovered",
-                            gradient: [
-                              Color(0xffedf8ee),
-                              Color(0xfff6fbf7),
-                            ],
-                          ),
-                          CardInfo(
-                            number: value.countries.critical,
-                            numberColors: Color(0xffffdc8b),
-                            title: "critical",
-                            gradient: [
-                              Color(0xfffff9ed),
-                              Color(0xfffffbf4),
-                            ],
-                          ),
-                        ],
-                      );
+                              shrinkWrap: true,
+                              physics: ClampingScrollPhysics(),
+                              crossAxisCount: 2,
+                              children: <Widget>[
+
+                                CardInfo(
+                                  number: value.countries.cases,
+                                  numberColors: Color(0xff8e61f3),
+                                  title: "infections",
+                                  gradient: [
+                                    Color(0xfff9f6fe),
+                                    Color(0xfffbfafe),
+                                  ],
+                                ),
+                                CardInfo(
+                                  number: value.countries.deaths,
+                                  numberColors: Colors.red,
+                                  title: "deaths",
+                                  gradient: [
+                                    Color(0xfffef1f6),
+                                    Color(0xfffef6fa),
+                                  ],
+                                ),
+                                CardInfo(
+                                  number: value.countries.recovered,
+                                  numberColors: Color(0xff2ac386),
+                                  title: "recovered",
+                                  gradient: [
+                                    Color(0xffedf8ee),
+                                    Color(0xfff6fbf7),
+                                  ],
+                                ),
+                                CardInfo(
+                                  number: value.countries.critical,
+                                  numberColors: Color(0xffffdc8b),
+                                  title: "critical",
+                                  gradient: [
+                                    Color(0xfffff9ed),
+                                    Color(0xfffffbf4),
+                                  ],
+                                ),
+                              ],
+                            );
                     },
                   ),
                   SizedBox(
@@ -175,22 +153,45 @@ class _HomeScreenState extends State<HomeScreen> {
                   Consumer<CaseProvider>(
                     builder: (BuildContext context, CaseProvider value,
                         Widget child) {
-                      return value.isLoading ? Center(child: CircularProgressIndicator()) : ListView.builder(
-                        itemCount: value.arrCountries.length,
-                        shrinkWrap: true,
-                        physics: ClampingScrollPhysics(),
-                        itemBuilder: (BuildContext context, int index) {
-                          return CardDetail(
-                            critical: value.arrCountries[index].critical,
-                            image: value.arrCountries[index].countryInfo.flag,
-                            nameCountries: value.arrCountries[index].country,
-                            active: value.arrCountries[index].active,
-                            recovered: value.arrCountries[index].recovered,
-                            deaths: value.arrCountries[index].deaths,
-                            cases: value.arrCountries[index].cases.toDouble(),
-                          );
-                        },
-                      );
+                      if (value.isLoading == false) {
+
+                      }
+                      return value.isLoading
+                          ? Center(child: CircularProgressIndicator())
+                          : ListView.builder(
+                              itemCount: value.arrCountries.length,
+                              shrinkWrap: true,
+                              physics: ClampingScrollPhysics(),
+                              itemBuilder: (BuildContext context, int index) {
+                                return InkWell(
+
+                                  onTap: (){
+
+//                                    Provider.of<DetailCasesProvider>(context,listen: false).fetchDataTimeLine(value.arrCountries[index].country);
+                                    Navigator.push(context,
+                                        MaterialPageRoute(builder: (_) =>
+                                            DetailCases(
+                                                value.arrCountries[index]
+                                                    .country,
+                                                value.arrCountries[index]
+                                                    .countryInfo.flag)));
+                                  },
+                                  child: CardDetail(
+                                    critical: value.arrCountries[index].critical,
+                                    image: value
+                                        .arrCountries[index].countryInfo.flag,
+                                    nameCountries:
+                                        value.arrCountries[index].country,
+                                    active: value.arrCountries[index].active,
+                                    recovered:
+                                        value.arrCountries[index].recovered,
+                                    deaths: value.arrCountries[index].deaths,
+                                    cases: value.arrCountries[index].cases
+                                        .toDouble(),
+                                  ),
+                                );
+                              },
+                            );
                     },
                   ),
                 ],
