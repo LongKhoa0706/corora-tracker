@@ -1,16 +1,11 @@
-# statisticalcorona
+#                                 🦠 Corona Tracker 
+# Preview
 
-A new Flutter application.
+The app is based on Dribble design:
 
-## Getting Started
+![af12c6b7236c55930dbdddee82438028](https://user-images.githubusercontent.com/49479782/81835482-82b30b80-956c-11ea-81df-96cb55814b21.png)
+![a5113b88f3c9f0644af2d96ce6dc50ea](https://user-images.githubusercontent.com/49479782/81835485-834ba200-956c-11ea-8758-1cfc792c4224.png)
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Attempt | #1 | #2 | #3 | #4 | #5 | #6 | #7 | #8 | #9 | #10 | #11
+--- | --- | --- | --- |--- |--- |--- |--- |--- |--- |--- |---
+Seconds | 301 | 283 | 290 | 286 | 289 | 285 | 287 | 287 | 272 | 276 | 269
