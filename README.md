@@ -1,4 +1,4 @@
-#                                 🦠 Corona Tracker 
+#                                 🦠👻💀 Corona Tracker 
 # Preview
 
 The app is based on Dribble design:
