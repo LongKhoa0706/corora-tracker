@@ -9,8 +9,8 @@ class Countries {
   int recovered;
   int active;
   int critical;
-  int casesPerOneMillion;
-  int deathsPerOneMillion;
+  dynamic casesPerOneMillion;
+  dynamic deathsPerOneMillion;
   int tests;
   String continent;
 

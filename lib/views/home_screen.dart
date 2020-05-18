@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:progress_indicators/progress_indicators.dart';
 import 'package:provider/provider.dart';
 import 'package:statisticalcorona/provider/case_provider.dart';
 import 'package:statisticalcorona/provider/detail_cases_provider.dart';
@@ -93,7 +94,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     builder: (BuildContext context, CaseProvider value,
                         Widget child) {
                       return value.isLoading
-                          ? CircularProgressIndicator()
+                          ? Center(child: JumpingDotsProgressIndicator(fontSize: 40.0,milliseconds: 9000))
                           : GridView.count(
                               shrinkWrap: true,
                               physics: ClampingScrollPhysics(),
@@ -157,7 +158,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
                       }
                       return value.isLoading
-                          ? Center(child: CircularProgressIndicator())
+                          ? Center(child: JumpingDotsProgressIndicator(fontSize: 40.0,milliseconds: 9000,))
                           : ListView.builder(
                               itemCount: value.arrCountries.length,
                               shrinkWrap: true,

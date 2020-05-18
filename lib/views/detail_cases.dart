@@ -73,7 +73,7 @@ class _DetailCasesState extends State<DetailCases> {
               ),
               Consumer<DetailCasesProvider>(
                 builder: (BuildContext context, DetailCasesProvider value, Widget child) {
-                  return ListView.builder(
+                  return value.isLoading ? CircularProgressIndicator() : ListView.builder(
                     physics: NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
                     itemCount: value.array.length,
