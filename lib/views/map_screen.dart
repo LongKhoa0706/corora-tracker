@@ -74,6 +74,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:statisticalcorona/provider/case_provider.dart';
 import 'package:statisticalcorona/provider/detail_cases_provider.dart';
+import 'package:statisticalcorona/widget/map/detail_information.dart';
 
 class MapScreen extends StatefulWidget {
   @override
@@ -86,10 +87,7 @@ class _MapScreenState extends State<MapScreen> {
 
   Completer<GoogleMapController> _controller = Completer();
 
-  final CameraPosition _kGooglePlex = CameraPosition(
-    target: LatLng(37.42796133580664, -122.085749655962),
-    zoom: 14.4746,
-  );
+
   BitmapDescriptor pinLocationIcon;
 
   Future <BitmapDescriptor> _createMarkerImageFromAsset(String iconPath) async {
@@ -99,7 +97,7 @@ class _MapScreenState extends State<MapScreen> {
   final CameraPosition _kLake = CameraPosition(
       bearing: 192.8334901395799,
       target: LatLng(41.8558871, 61.4680761),
-      zoom: 5.0);
+      zoom: 3.0);
 
   @override
   void initState() {
@@ -186,7 +184,7 @@ class _MapScreenState extends State<MapScreen> {
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
                         image: DecorationImage(
-                          image: NetworkImage(image),
+                          image: image.isEmpty? CircularProgressIndicator() : NetworkImage(image),
                           fit: BoxFit.cover
                         )
                       ),
@@ -232,42 +230,32 @@ class _MapScreenState extends State<MapScreen> {
                 SizedBox(
                   height: 20,
                 ),
-                Container(
-                  width: 100,
-                  height: 80,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    gradient: LinearGradient(begin:Alignment.topLeft,end: Alignment.topRight,colors: <Color>[
-                      Colors.redAccent[100],
-                      Colors.redAccent,
-                    ],
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: <Widget>[
+                    DetailInfomation(
+                      title: "Active",
+                      number: cases,
+                      gradientColor: [
+                        Colors.redAccent[100],
+                        Colors.redAccent,
+                      ],
+                      icon: Icons.trending_up,
+                      iconColors: Colors.purple,
                     ),
-                  ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget>[
-                      Text(
-                        active.toString(),
-                        style: TextStyle(
-                          fontSize: 22,
-                          color: Colors.black,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: <Widget>[
-                          Text(
-                              "Active"
-                          ),
-                          Icon(Icons.trending_up,color: Colors.purple,)
-                        ],
-                      )
-                    ],
-                  ),
-                ),
+                    DetailInfomation(
+                      title: "Recoverd",
+                      number: recovered,
+                      gradientColor: [
+                        Colors.green[400],
+                        Colors.lightGreenAccent[100],
+                      ],
+                      icon: Icons.trending_down,
+                      iconColors: Colors.greenAccent,
+                    ),
+                  ],
+                )
               ],
             ),
           ),

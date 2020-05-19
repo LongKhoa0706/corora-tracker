@@ -25,6 +25,8 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     var data =     Provider.of<CaseProvider>(context, listen: false);
+    final GlobalKey<AnimatedListState> _listKey = GlobalKey();
+
     return Scaffold(
       backgroundColor: Colors.white,
       body: RefreshIndicator(
@@ -159,40 +161,24 @@ class _HomeScreenState extends State<HomeScreen> {
                       }
                       return value.isLoading
                           ? Center(child: JumpingDotsProgressIndicator(fontSize: 40.0,milliseconds: 9000,))
-                          : ListView.builder(
-                              itemCount: value.arrCountries.length,
-                              shrinkWrap: true,
-                              physics: ClampingScrollPhysics(),
-                              itemBuilder: (BuildContext context, int index) {
-                                return InkWell(
-
-                                  onTap: (){
-
-//                                    Provider.of<DetailCasesProvider>(context,listen: false).fetchDataTimeLine(value.arrCountries[index].country);
-                                    Navigator.push(context,
-                                        MaterialPageRoute(builder: (_) =>
-                                            DetailCases(
-                                                value.arrCountries[index]
-                                                    .country,
-                                                value.arrCountries[index]
-                                                    .countryInfo.flag)));
-                                  },
-                                  child: CardDetail(
-                                    critical: value.arrCountries[index].critical,
-                                    image: value
-                                        .arrCountries[index].countryInfo.flag,
-                                    nameCountries:
-                                        value.arrCountries[index].country,
-                                    active: value.arrCountries[index].active,
-                                    recovered:
-                                        value.arrCountries[index].recovered,
-                                    deaths: value.arrCountries[index].deaths,
-                                    cases: value.arrCountries[index].cases
-                                        .toDouble(),
-                                  ),
-                                );
-                              },
+                          : AnimatedList( initialItemCount: value.arrCountries.length,shrinkWrap: true,key: _listKey,itemBuilder: (BuildContext context, int index, Animation<double> animation) {
+                            return FadeTransition(
+                              opacity: animation,
+                              child: CardDetail(
+                                critical: value.arrCountries[index].critical,
+                                image: value
+                                    .arrCountries[index].countryInfo.flag,
+                                nameCountries:
+                                value.arrCountries[index].country,
+                                active: value.arrCountries[index].active,
+                                recovered:
+                                value.arrCountries[index].recovered,
+                                deaths: value.arrCountries[index].deaths,
+                                cases: value.arrCountries[index].cases
+                                    .toDouble(),
+                              ),
                             );
+                      },);
                     },
                   ),
                 ],
