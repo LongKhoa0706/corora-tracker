@@ -1,10 +1,7 @@
 #                                 🦠 👻 💀 Corona Tracker 
 # 🎉🔥 Preview 
 
-The app is based on Dribble design:
 
-![af12c6b7236c55930dbdddee82438028](https://user-images.githubusercontent.com/49479782/81835482-82b30b80-956c-11ea-81df-96cb55814b21.png)
-![a5113b88f3c9f0644af2d96ce6dc50ea](https://user-images.githubusercontent.com/49479782/81835485-834ba200-956c-11ea-8758-1cfc792c4224.png)
 
 The result is:
 
@@ -12,3 +9,6 @@ The result is:
 | <img width="403" alt="Screen Shot 2020-05-13 at 23 15 37" src="https://user-images.githubusercontent.com/49479782/81840686-88601f80-9573-11ea-839e-97440bdb0451.png">
 
  |<img width="399" alt="Screen Shot 2020-05-13 at 23 13 50" src="https://user-images.githubusercontent.com/49479782/81840894-ceb57e80-9573-11ea-9d5b-49aea2c7b323.png">
+
+# Video Product: 
+https://youtu.be/IZMaEirww-s
