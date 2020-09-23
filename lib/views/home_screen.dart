@@ -13,18 +13,21 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  ScrollController _scrollController;
+  int page = 0;
+  bool isLoading = false;
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
 
     Provider.of<CaseProvider>(context, listen: false).initcialCall();
-
   }
 
   @override
   Widget build(BuildContext context) {
-    var data =     Provider.of<CaseProvider>(context, listen: false);
+    var data =  Provider.of<CaseProvider>(context, listen: false);
     final GlobalKey<AnimatedListState> _listKey = GlobalKey();
 
     return Scaffold(
@@ -96,8 +99,9 @@ class _HomeScreenState extends State<HomeScreen> {
                     builder: (BuildContext context, CaseProvider value,
                         Widget child) {
                       return value.isLoading
-                          ? Center(child: JumpingDotsProgressIndicator(fontSize: 40.0,milliseconds: 9000))
+                          ? Center(child: JumpingDotsProgressIndicator(fontSize: 40.0,milliseconds: 200))
                           : GridView.count(
+
                               shrinkWrap: true,
                               physics: ClampingScrollPhysics(),
                               crossAxisCount: 2,
@@ -160,10 +164,18 @@ class _HomeScreenState extends State<HomeScreen> {
 
                       }
                       return value.isLoading
-                          ? Center(child: JumpingDotsProgressIndicator(fontSize: 40.0,milliseconds: 9000,))
-                          : AnimatedList( initialItemCount: value.arrCountries.length,shrinkWrap: true,key: _listKey,itemBuilder: (BuildContext context, int index, Animation<double> animation) {
-                            return FadeTransition(
-                              opacity: animation,
+                          ? Center(child: JumpingDotsProgressIndicator(fontSize: 40.0,milliseconds: 200,))
+                          : ListView.builder(
+                          physics: NeverScrollableScrollPhysics(),
+                          shrinkWrap: true,
+                          controller: _scrollController,
+                          itemCount: value.listDataCountries.length,
+                          itemBuilder: (_,index){
+
+                            return GestureDetector(
+                              onTap: (){
+                                Navigator.push(context, MaterialPageRoute(builder: (_)=>DetailCases(value.arrCountries[index].country, value.arrCountries[index].countryInfo.flag)));
+                              },
                               child: CardDetail(
                                 critical: value.arrCountries[index].critical,
                                 image: value
@@ -178,7 +190,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     .toDouble(),
                               ),
                             );
-                      },);
+                      });
                     },
                   ),
                 ],
@@ -190,4 +202,27 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
     );
   }
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+
+  }
+  _scrollListener() {
+    if (_scrollController.offset >=
+        _scrollController.position.maxScrollExtent &&
+        !_scrollController.position.outOfRange) {
+      setState(() {
+        print("comes to bottom $isLoading");
+        isLoading = true;
+
+        if (isLoading) {
+          print("RUNNING LOAD MORE");
+
+          page = page + 1;
+        }
+      });
+    }
+  }
+
 }
